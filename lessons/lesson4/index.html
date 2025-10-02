@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мое портфолио</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Мое портфолио</a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="#about">Обо мне</a>
+                <a class="nav-link" href="#projects">Проекты</a>
+                <a class="nav-link" href="#contact">Контакты</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Главная секция -->
+    <section class="bg-primary text-white py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4">Привет! Я юный программист</h1>
+                    <p class="lead">Создаю крутые веб-проекты с помощью HTML, CSS и JavaScript!</p>
+                    <button class="btn btn-light btn-lg" onclick="показатьПриветствие()">Поздороваться</button>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <div class="bg-white bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 200px; height: 200px;">
+                        <span class="display-1">👨‍💻</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Обо мне -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Обо мне</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">🎓 Что я изучаю</h5>
+                            <ul class="list-unstyled">
+                                <li>✅ HTML - создание структуры сайтов</li>
+                                <li>✅ CSS - стилизация и красота</li>
+                                <li>✅ JavaScript - интерактивность</li>
+                                <li>✅ Bootstrap - готовые стили</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">🎯 Мои цели</h5>
+                            <ul class="list-unstyled">
+                                <li>🚀 Создать свой первый сайт</li>
+                                <li>🎮 Разработать игру</li>
+                                <li>💡 Придумать полезное приложение</li>
+                                <li>🌟 Стать крутым программистом</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Проекты -->
+    <section id="projects" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Мои проекты</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow">
+                        <div class="card-body text-center">
+                            <div class="bg-primary bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                <span class="text-white fs-2">🧮</span>
+                            </div>
+                            <h5 class="card-title">Калькулятор</h5>
+                            <p class="card-text">Простой калькулятор с красивым дизайном. Умеет складывать, вычитать, умножать и делить!</p>
+                            <div class="d-flex gap-2 justify-content-center mb-3">
+                                <span class="badge bg-primary">HTML</span>
+                                <span class="badge bg-primary">CSS</span>
+                                <span class="badge bg-primary">JS</span>
+                            </div>
+                            <button class="btn btn-outline-primary" onclick="открытьПроект('calculator')">Посмотреть</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 shadow">
+                        <div class="card-body text-center">
+                            <div class="bg-success bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                <span class="text-white fs-2">🎯</span>
+                            </div>
+                            <h5 class="card-title">Угадай число</h5>
+                            <p class="card-text">Увлекательная игра! Компьютер загадывает число, а вы пытаетесь его угадать.</p>
+                            <div class="d-flex gap-2 justify-content-center mb-3">
+                                <span class="badge bg-success">HTML</span>
+                                <span class="badge bg-success">CSS</span>
+                                <span class="badge bg-success">JS</span>
+                            </div>
+                            <button class="btn btn-outline-success" onclick="открытьПроект('guess-number')">Играть</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 shadow">
+                        <div class="card-body text-center">
+                            <div class="bg-warning bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                <span class="text-white fs-2">🎮</span>
+                            </div>
+                            <h5 class="card-title">Крестики-нолики</h5>
+                            <p class="card-text">Классическая игра против компьютера. Попробуйте выиграть у умного ИИ!</p>
+                            <div class="d-flex gap-2 justify-content-center mb-3">
+                                <span class="badge bg-warning">HTML</span>
+                                <span class="badge bg-warning">CSS</span>
+                                <span class="badge bg-warning">JS</span>
+                            </div>
+                            <button class="btn btn-outline-warning" onclick="открытьПроект('tic-tac-toe')">Играть</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Интерактивная секция -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card shadow">
+                        <div class="card-body text-center">
+                            <h3>🎨 Интерактивная секция</h3>
+                            <p>Нажмите на кнопки и посмотрите, что происходит!</p>
+                            
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <h5>Изменить цвет фона</h5>
+                                    <div class="d-flex gap-2 justify-content-center">
+                                        <button class="btn btn-danger" onclick="изменитьЦветФона('lightcoral')">Красный</button>
+                                        <button class="btn btn-success" onclick="изменитьЦветФона('lightgreen')">Зеленый</button>
+                                        <button class="btn btn-primary" onclick="изменитьЦветФона('lightblue')">Синий</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Счетчик кликов</h5>
+                                    <p class="display-6 text-primary" id="счетчик">0</p>
+                                    <button class="btn btn-primary" onclick="увеличитьСчетчик()">+1</button>
+                                    <button class="btn btn-secondary" onclick="сброситьСчетчик()">Сбросить</button>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h5>Секретное сообщение</h5>
+                                <button class="btn btn-outline-primary" onclick="показатьСекрет()">Показать секрет</button>
+                                <p id="секретноеСообщение" class="mt-3 text-muted"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact" class="py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Связаться со мной</h3>
+                    <p>Хотите узнать больше о моих проектах? Напишите мне!</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white fs-3">📧</a>
+                        <a href="#" class="text-white fs-3">📱</a>
+                        <a href="#" class="text-white fs-3">🐙</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3>Мои навыки</h3>
+                    <div class="progress mb-2" style="height: 20px;">
+                        <div class="progress-bar" role="progressbar" style="width: 80%">HTML 80%</div>
+                    </div>
+                    <div class="progress mb-2" style="height: 20px;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 70%">CSS 70%</div>
+                    </div>
+                    <div class="progress mb-2" style="height: 20px;">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 60%">JavaScript 60%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="bg-secondary text-white text-center py-3">
+        <div class="container">
+            <p class="mb-0">© 2025 Мое портфолио. Сделано с ❤️ и JavaScript!</p>
+        </div>
+    </footer>
+
+    <script>
+        let счетчик = 0;
+        
+        function показатьПриветствие() {
+            alert("Привет! Добро пожаловать в мое портфолио! 🎉");
+        }
+        
+        function открытьПроект(проект) {
+            const проекты = {
+                'calculator': '../../projects/calculator.html',
+                'guess-number': '../../projects/guess-number.html',
+                'tic-tac-toe': '../../projects/tic-tac-toe.html'
+            };
+            
+            if (проекты[проект]) {
+                window.open(проекты[проект], '_blank');
+            } else {
+                alert('Проект пока не готов! 😅');
+            }
+        }
+        
+        function изменитьЦветФона(цвет) {
+            document.body.style.backgroundColor = цвет;
+        }
+        
+        function увеличитьСчетчик() {
+            счетчик++;
+            document.getElementById('счетчик').textContent = счетчик;
+        }
+        
+        function сброситьСчетчик() {
+            счетчик = 0;
+            document.getElementById('счетчик').textContent = счетчик;
+        }
+        
+        function показатьСекрет() {
+            const секреты = [
+                "🎉 Секрет: программирование - это как магия!",
+                "🌟 Секрет: каждый программист когда-то был новичком!",
+                "🚀 Секрет: лучший способ изучить программирование - практиковаться!",
+                "💡 Секрет: ошибки в коде - это нормально, они помогают учиться!",
+                "🎯 Секрет: вы уже программист, если можете создать этот сайт!"
+            ];
+            
+            const случайныйСекрет = секреты[Math.floor(Math.random() * секреты.length)];
+            document.getElementById('секретноеСообщение').innerHTML = случайныйСекрет;
+            document.getElementById('секретноеСообщение').className = 'mt-3 text-primary fw-bold';
+        }
+        
+        // Приветствие при загрузке страницы
+        window.onload = function() {
+            console.log("Портфолио загружено! Добро пожаловать! 🎉");
+        };
+    </script>
+</body>
+</html>
