@@ -147,6 +147,25 @@
         <p class="subtitle">Простой калькулятор для обучения программированию</p>
 
         <div class="section">
+            <h2>🔄 Попробуйте прямо здесь</h2>
+            <p>Эта форма отправляет данные в Python-скрипт через CGI без дополнительных фреймворков.</p>
+            <form id="live-calculator">
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+                    <input name="a" type="text" placeholder="Первое число" required style="flex: 1; min-width: 120px; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+                    <select name="op" style="padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+                        <option value="+">+</option>
+                        <option value="-">-</option>
+                        <option value="*">*</option>
+                        <option value="/">/</option>
+                    </select>
+                    <input name="b" type="text" placeholder="Второе число" required style="flex: 1; min-width: 120px; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+                    <button type="submit" class="copy-btn" style="flex: none;">Посчитать</button>
+                </div>
+            </form>
+            <div id="live-result" style="margin-top: 15px; font-size: 1.1rem; font-weight: 600;"></div>
+        </div>
+
+        <div class="section">
             <h2>📋 Как запустить калькулятор</h2>
             <ol class="steps">
                 <li>
@@ -216,6 +235,39 @@
     </div>
 
     <script>
+        const form = document.getElementById('live-calculator');
+        const resultBox = document.getElementById('live-result');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            resultBox.textContent = 'Считаем...';
+
+            const formData = new FormData(form);
+            const body = new URLSearchParams(formData);
+
+            try {
+                const response = await fetch('/cgi-bin/python_calculator.py', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: body.toString(),
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    resultBox.textContent = `Ответ: ${data.expression} = ${data.result}`;
+                    resultBox.style.color = '#155724';
+                } else {
+                    resultBox.textContent = data.error;
+                    resultBox.style.color = '#b22222';
+                }
+            } catch (err) {
+                resultBox.textContent = 'Не удалось связаться с сервером Python.';
+                resultBox.style.color = '#b22222';
+            }
+        });
+
         function copyCode(elementId) {
             const codeElement = document.getElementById(elementId);
             const text = codeElement.textContent.trim();
