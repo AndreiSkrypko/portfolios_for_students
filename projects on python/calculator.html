@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор на Python</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section h2 {
+            color: #333;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            margin: 15px 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: '$';
+            color: #50fa7b;
+            margin-right: 10px;
+        }
+
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #5568d3;
+        }
+
+        .copy-btn:active {
+            background: #4456b8;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .steps {
+            list-style: none;
+            padding: 0;
+        }
+
+        .steps li {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+
+        .steps li strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .example {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .example h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧮 Калькулятор на Python</h1>
+        <p class="subtitle">Простой калькулятор для обучения программированию</p>
+
+        <div class="section">
+            <h2>📋 Как запустить калькулятор</h2>
+            <ol class="steps">
+                <li>
+                    <strong>Шаг 1: Откройте терминал (командную строку)</strong>
+                    <p>На Windows: нажмите Win+R, введите <code>cmd</code> и нажмите Enter</p>
+                    <p>На Mac/Linux: откройте Terminal</p>
+                </li>
+                <li>
+                    <strong>Шаг 2: Перейдите в папку с калькулятором</strong>
+                    <div class="code-block" id="code1">cd "projects on python"</div>
+                    <button class="copy-btn" onclick="copyCode('code1')">📋 Копировать команду</button>
+                    <div class="success-message" id="success1">✅ Скопировано!</div>
+                </li>
+                <li>
+                    <strong>Шаг 3: Запустите калькулятор</strong>
+                    <div class="code-block" id="code2">python calculator.py</div>
+                    <button class="copy-btn" onclick="copyCode('code2')">📋 Копировать команду</button>
+                    <div class="success-message" id="success2">✅ Скопировано!</div>
+                </li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>💡 Пример использования</h2>
+            <div class="example">
+                <h3>Пример работы калькулятора:</h3>
+                <div class="code-block" style="background: #1e1e1e;">
+Шаг 1: Введите первое число
+   Первое число: <span style="color: #50fa7b;">5</span>
+
+Шаг 2: Выберите знак
+   Доступные операции: +, -, *, /
+   Операция: <span style="color: #50fa7b;">+</span>
+
+Шаг 3: Введите второе число
+   Второе число: <span style="color: #50fa7b;">3</span>
+
+--------------------------------------------------
+
+РЕЗУЛЬТАТ:
+   5 + 3 = 8.0
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Доступные операции</h2>
+            <ul>
+                <li><strong>+</strong> - Сложение (например: 5 + 3 = 8)</li>
+                <li><strong>-</strong> - Вычитание (например: 5 - 3 = 2)</li>
+                <li><strong>*</strong> - Умножение (например: 5 * 3 = 15)</li>
+                <li><strong>/</strong> - Деление (например: 6 / 3 = 2)</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>⚠️ Важные замечания</h2>
+            <ul>
+                <li>Можно вводить числа с запятой или точкой (2,5 или 2.5)</li>
+                <li>Нельзя делить на ноль - программа покажет ошибку</li>
+                <li>Если ввести не число, программа сообщит об ошибке</li>
+                <li>Убедитесь, что у вас установлен Python 3.6 или новее</li>
+            </ul>
+        </div>
+
+        <a href="../index.html" class="back-link">← Назад к портфолио</a>
+    </div>
+
+    <script>
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const text = codeElement.textContent.trim();
+            
+            // Убираем символ $ если он есть
+            const code = text.startsWith('$') ? text.substring(1).trim() : text;
+            
+            // Копируем в буфер обмена
+            navigator.clipboard.writeText(code).then(function() {
+                // Показываем сообщение об успехе
+                const successId = elementId.replace('code', 'success');
+                const successMsg = document.getElementById(successId);
+                successMsg.style.display = 'block';
+                
+                // Скрываем сообщение через 2 секунды
+                setTimeout(function() {
+                    successMsg.style.display = 'none';
+                }, 2000);
+            }).catch(function(err) {
+                console.error('Ошибка копирования:', err);
+                alert('Не удалось скопировать. Попробуйте выделить текст вручную.');
+            });
+        }
+    </script>
+</body>
+</html>
+
