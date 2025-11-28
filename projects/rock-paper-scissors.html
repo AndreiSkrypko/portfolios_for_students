@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Камень, ножницы, бумага</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            text-align: center;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .buttons button {
+            padding: 20px 35px;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #rock {
+            background: #8B4513;
+            color: white;
+        }
+
+        #paper {
+            background: #4169E1;
+            color: white;
+        }
+
+        #scissors {
+            background: #FF6347;
+            color: white;
+        }
+
+        .buttons button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .buttons button:active {
+            transform: translateY(-2px);
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            min-height: 100px;
+        }
+
+        .result h2 {
+            color: #333;
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+
+        .choices {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .choice-box {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            min-width: 120px;
+        }
+
+        .choice-box strong {
+            display: block;
+            color: #667eea;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .choice-box span {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .message {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background: white;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .score {
+            margin-top: 25px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-item strong {
+            display: block;
+            color: #667eea;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .score-item span {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .reset-btn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .reset-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            background: #f8f9fa;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🎮 Камень, ножницы, бумага</h1>
+        <p class="subtitle">Выбери свой вариант и победи компьютер!</p>
+        
+        <div class="buttons">
+            <button id="rock" onclick="playGame('камень')">🪨 Камень</button>
+            <button id="paper" onclick="playGame('бумага')">📄 Бумага</button>
+            <button id="scissors" onclick="playGame('ножницы')">✂️ Ножницы</button>
+        </div>
+        
+        <div id="result" class="result">
+            <p style="color: #666; font-size: 1.1rem;">Выбери свой вариант, чтобы начать игру!</p>
+        </div>
+
+        <div class="score">
+            <div class="score-item">
+                <strong>Побед</strong>
+                <span id="wins">0</span>
+            </div>
+            <div class="score-item">
+                <strong>Поражений</strong>
+                <span id="losses">0</span>
+            </div>
+            <div class="score-item">
+                <strong>Ничьих</strong>
+                <span id="draws">0</span>
+            </div>
+        </div>
+
+        <button class="reset-btn" onclick="resetScore()">🔄 Сбросить счёт</button>
+
+        <div>
+            <a href="../index.html" class="back-link">← Назад к портфолио</a>
+        </div>
+    </div>
+
+    <script>
+        // Счётчики для статистики
+        let wins = 0;
+        let losses = 0;
+        let draws = 0;
+
+        // Функция для игры
+        function playGame(playerChoice) {
+            // Варианты, которые может выбрать компьютер
+            const options = ['камень', 'ножницы', 'бумага'];
+            
+            // Компьютер случайно выбирает свой вариант
+            const randomIndex = Math.floor(Math.random() * 3);
+            const computerChoice = options[randomIndex];
+            
+            // Находим элемент для вывода результата
+            const resultDiv = document.getElementById('result');
+            
+            // Определяем победителя
+            let message = '';
+            let emoji = '';
+            
+            if (playerChoice === computerChoice) {
+                message = `Ничья! Вы оба выбрали ${playerChoice}!`;
+                emoji = '🤝';
+                draws++;
+                updateScore();
+            } else if (
+                (playerChoice === 'камень' && computerChoice === 'ножницы') ||
+                (playerChoice === 'ножницы' && computerChoice === 'бумага') ||
+                (playerChoice === 'бумага' && computerChoice === 'камень')
+            ) {
+                message = `Ты выиграл! ${getWinMessage(playerChoice, computerChoice)}`;
+                emoji = '🎉';
+                wins++;
+                updateScore();
+            } else {
+                message = `Ты проиграл! ${getLoseMessage(playerChoice, computerChoice)}`;
+                emoji = '😢';
+                losses++;
+                updateScore();
+            }
+            
+            // Выводим результат на страницу
+            resultDiv.innerHTML = `
+                <h2>Результат:</h2>
+                <div class="choices">
+                    <div class="choice-box">
+                        <strong>Твой выбор:</strong>
+                        <span>${getEmoji(playerChoice)} ${playerChoice}</span>
+                    </div>
+                    <div class="choice-box">
+                        <strong>Компьютер:</strong>
+                        <span>${getEmoji(computerChoice)} ${computerChoice}</span>
+                    </div>
+                </div>
+                <p class="message">${emoji} ${message}</p>
+            `;
+        }
+
+        // Функция для получения эмодзи по выбору
+        function getEmoji(choice) {
+            const emojis = {
+                'камень': '🪨',
+                'бумага': '📄',
+                'ножницы': '✂️'
+            };
+            return emojis[choice] || '';
+        }
+
+        // Функция для сообщения о победе
+        function getWinMessage(player, computer) {
+            if (player === 'камень' && computer === 'ножницы') {
+                return 'Камень бьёт ножницы!';
+            } else if (player === 'ножницы' && computer === 'бумага') {
+                return 'Ножницы режут бумагу!';
+            } else if (player === 'бумага' && computer === 'камень') {
+                return 'Бумага накрывает камень!';
+            }
+            return '';
+        }
+
+        // Функция для сообщения о проигрыше
+        function getLoseMessage(player, computer) {
+            if (player === 'камень' && computer === 'бумага') {
+                return 'Бумага накрывает камень!';
+            } else if (player === 'ножницы' && computer === 'камень') {
+                return 'Камень бьёт ножницы!';
+            } else if (player === 'бумага' && computer === 'ножницы') {
+                return 'Ножницы режут бумагу!';
+            }
+            return '';
+        }
+
+        // Функция для обновления счёта
+        function updateScore() {
+            document.getElementById('wins').textContent = wins;
+            document.getElementById('losses').textContent = losses;
+            document.getElementById('draws').textContent = draws;
+        }
+
+        // Функция для сброса счёта
+        function resetScore() {
+            wins = 0;
+            losses = 0;
+            draws = 0;
+            updateScore();
+            document.getElementById('result').innerHTML = 
+                '<p style="color: #666; font-size: 1.1rem;">Счёт сброшен! Выбери свой вариант, чтобы начать игру!</p>';
+        }
+    </script>
+</body>
+</html>
+
